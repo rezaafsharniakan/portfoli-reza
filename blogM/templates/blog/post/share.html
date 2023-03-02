@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% block title %}Share a post{% endblock %}
+{% block content %}
+{% if sent %}
+<h1>ایمیل باموفقیت ارسال شد</h1>
+<p>
+"{{ post.title }}" ارسال موفقیت آمیز به {{ form.cleaned_
+data.to }}.
+</p>
+{% else %}
+<h1>
+   اشتراک گذاری
+"{{ post.title }}"
+باایمیل
+
+</h1>
+<form method="post">
+{{ form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Send e-mail">
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "blog/base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<h1>{{ post.title }}</h1>
+{% if post.image.url  %}
+<img src="{{ post.image.url }}" >
+{% endif %}
+<p class="date">
+Published {{ post.publish }} by {{ post.author }}
+</p>
+{{ post.body|linebreaks }}
+<p>
+
+{% if post.file  %}
+<p>
+فایل ضمیمه
+
+        <a href="{{ post.file.url }}">{{ post.file.url }}</a>
+
+</p>
+{% endif %}
+
+<a href="{% url "blogm:post_share" post.id %}">
+اشتراک گذاری این مطلب
+</a>
+</p>
+
+{% with comments.count as total_comments %}
+<h2>
+{{ total_comments }}نظر
+</h2>
+{% endwith %}
+
+{% for comment in comments %}
+<div class="comment">
+<p class="info">
+نظر {{ forloop.counter }}ارسالی از{{ comment.name }}
+{{ comment.created }}
+</p>
+{{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p>هنوزنظری نداده اید</p>
+{% endfor %}
+
+{% if new_comment %}
+<h2>پیام شما ارسال شد بعد از تایید منتشر می شود</h2>
+{% else %}
+<h2>اضافه کردن نظرجدید</h2>
+<form method="post">
+{{ comment_form.as_p }}
+{% csrf_token %}
+<p><input type="submit" value="ارسال نظر"></p>
+</form>
+{% endif %}
+
+{% endblock %}

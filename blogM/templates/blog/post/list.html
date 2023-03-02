@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% block title %}Reza Afsharniakan Blog{% endblock %}
+{% block content %}
+
+{% for post in posts %}
+<h2>
+<a href="{{ post.get_absolute_url }}">
+{{ post.title }}
+
+
+</a>
+</h2>
+<p class="date">
+Published {{ post.publish }} by {{ post.author }}
+</p>
+{% if post.image.url  %}
+<img src="{{ post.image.url }}" width="50px" height="60px">
+{% endif %}
+
+{{ post.body|truncatewords:15|linebreaks }}
+{% endfor %}
+{% include "pagination.html" with page=posts %}
+{% endblock %}

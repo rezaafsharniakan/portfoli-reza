@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+
+    'blogM.apps.BlogmConfig',
     'portfolio',
 ]
 
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -127,3 +128,10 @@ MEDIA_URL = '/media/'
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'reza.afsharniakan@gmail.com'
+EMAIL_HOST_PASSWORD = 'reza3255900018'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
